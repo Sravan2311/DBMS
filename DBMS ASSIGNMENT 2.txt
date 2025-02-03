@@ -1,0 +1,135 @@
+												DBMS ASSIGNMENT 2 
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| 379omega           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| student_info_db    |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use 379omega;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_379omega |
++--------------------+
+| student            |
+| student_details    |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> create table SD(
+    -> S_ID int,
+    -> Name varchar(50),
+    -> Address varchar(50)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into SD(S_ID,Name,Address)
+    -> values(1,'Harsh','Kolkata');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into SD(S_ID,Name,Address)
+    -> values(2,'Ashish','Durgapur');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into SD(S_ID,Name,Address)
+    -> values(3,'Pratik','Delhi');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into SD(S_ID,Name,Address)
+    -> values(4,'Dhanraj','Bihar');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into SD(S_ID,Name,Address)
+    -> values(5,'Ram','Rajasthan');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from SD;
++------+---------+-----------+
+| S_ID | Name    | Address   |
++------+---------+-----------+
+|    1 | Harsh   | Kolkata   |
+|    2 | Ashish  | Durgapur  |
+|    3 | Pratik  | Delhi     |
+|    4 | Dhanraj | Bihar     |
+|    5 | Ram     | Rajasthan |
++------+---------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> create table SM(
+    -> ID int,
+    -> Name varchar(50),
+    -> Marks int,
+    -> Age int
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into SM(ID,Name,Marks,Age)
+    -> values(1,'Harsh',90,19);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into SM(ID,Name,Marks,Age)
+    -> values(2,'Suresh',50,20);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into SM(ID,Name,Marks,Age)
+    -> values(3,'Pratik',80,19);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into SM(ID,Name,Marks,Age)
+    -> values(4,'Dhanraj',95,21);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into SM(ID,Name,Marks,Age)
+    -> values(5,'Ram',85,18);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from SM;
++------+---------+-------+------+
+| ID   | Name    | Marks | Age  |
++------+---------+-------+------+
+|    1 | Harsh   |    90 |   19 |
+|    2 | Suresh  |    50 |   20 |
+|    3 | Pratik  |    80 |   19 |
+|    4 | Dhanraj |    95 |   21 |
+|    5 | Ram     |    85 |   18 |
++------+---------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> create view Details as
+    -> select Name,Address from SD
+    -> where S_ID<5;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from Details;
++---------+----------+
+| Name    | Address  |
++---------+----------+
+| Harsh   | Kolkata  |
+| Ashish  | Durgapur |
+| Pratik  | Delhi    |
+| Dhanraj | Bihar    |
++---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> create view Marks as
+    -> select SM.ID,SD.Name,SD.Address,SM.Marks from SD,SM
+    -> where SD.Name=SM.Name;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from Marks;
++------+---------+-----------+-------+
+| ID   | Name    | Address   | Marks |
++------+---------+-----------+-------+
+|    1 | Harsh   | Kolkata   |    90 |
+|    3 | Pratik  | Delhi     |    80 |
+|    4 | Dhanraj | Bihar     |    95 |
+|    5 | Ram     | Rajasthan |    85 |
++------+---------+-----------+-------+
+4 rows in set (0.00 sec)
